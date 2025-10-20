@@ -13,34 +13,5 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/test;
-import ballerina/io;
 
-configurable ApiKeysConfig apiKeyConfig = ?;
 
-final Client temenos = check new (apiKeyConfig);
-
-@test:Config {}
-isolated function testGetCustomers() returns error? {
-    CustomerInformationResponse|error response = temenos->/customers.get();
-    if response is CustomerInformationResponse {
-        io:println("Success Response: ", response);
-        test:assertTrue(true, "Successfully retrieved customer information");
-    } else {
-        io:println("Error Response: ", response.message());
-        test:assertFail("Failed to retrieve customers: " + response.message());
-    }
-}
-
-@test:Config {}
-isolated function testGetCustomerDetails() returns error? {
-    string customerId = "66052"; // Replace with a valid customerId from GET /customers response
-    CustomerResponse|error response = temenos->/customers/[customerId].get();
-    if response is CustomerResponse {
-        io:println("Success Response for Customer Details: ", response);
-        test:assertTrue(true, "Successfully retrieved customer details for ID: " + customerId);
-    } else {
-        io:println("Error Response for Customer Details: ", response.message());
-        test:assertFail("Failed to retrieve customer details for ID " + customerId + ": " + response.message());
-    }
-}

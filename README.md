@@ -1,4 +1,4 @@
-# Ballerina temenos cloud system control service elasticity connector
+# Ballerina {{MODULE_NAME_PC}} connector
 
 [![Build](https://github.com/ballerina-platform/{{REPO_NAME}}/actions/workflows/ci.yml/badge.svg)](https://github.com/ballerina-platform/{{REPO_NAME}}/actions/workflows/ci.yml)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/{{REPO_NAME}}.svg)](https://github.com/ballerina-platform/{{REPO_NAME}}/commits/master)
@@ -18,7 +18,7 @@
 
 ## Examples
 
-The `{{MODULE_NAME_PC}}` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-temenos/tree/main/examples/), covering the following use cases:
+The `{{MODULE_NAME_PC}}` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/{{REPO_NAME}}/tree/main/examples/), covering the following use cases:
 
 [//]: # (TODO: Add examples)
 

@@ -12,6 +12,6 @@
 
 ## Examples
 
-The `TemenosConnector` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-temenos/tree/main/examples/), covering the following use cases:
+The `{{MODULE_NAME_PC}}` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/{{REPO_NAME}}/tree/main/examples/), covering the following use cases:
 
 [//]: # (TODO: Add examples)

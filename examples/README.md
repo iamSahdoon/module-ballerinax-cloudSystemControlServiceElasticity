@@ -1,6 +1,6 @@
 # Examples
 
-The `ballerinax/temenos` connector provides practical examples illustrating usage in various scenarios.
+The `ballerinax/{{MODULE_NAME_CC}}` connector provides practical examples illustrating usage in various scenarios.
 
 [//]: # (TODO: Add examples)
 1. 
