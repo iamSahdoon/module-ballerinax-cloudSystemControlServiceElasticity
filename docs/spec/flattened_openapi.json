@@ -1,0 +1,1746 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "APIs to control service elasticity for system deployed in Cloud",
+    "description" : "Creates , amends and retrieves the service profile elasticity features including upscaling and downscaling of processing agents, enabling dynamic provisioning and cleaning up inactive pods",
+    "version" : "v1.1.0"
+  },
+  "servers" : [ {
+    "url" : "https://api.temenos.com/api/v1.1.0/"
+  } ],
+  "security" : [ {
+    "apiKey" : [ ]
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/system/services/elasticity/servers/{serverName}/serviceCleanups" : {
+      "post" : {
+        "tags" : [ ],
+        "summary" : "Create cleanup instruction to initiate cleanup of downscaled servers",
+        "description" : "Create cleanup instruction for the particular server (pod) where services have been killed during downscaling phase",
+        "operationId" : "createServiceElasticCleanup",
+        "parameters" : [ {
+          "name" : "serverName",
+          "in" : "path",
+          "description" : "Contains the name of the server on which the service will run.  In cloud mode, it refers to pod or container.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceElasticCleanup"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "ServiceElasticCleanupResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceElasticCleanupResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    },
+    "/system/services/settings/{settingId}/elasticity" : {
+      "put" : {
+        "tags" : [ ],
+        "summary" : "Update dynamic provisioning for system deployed in cloud",
+        "description" : "Update dynamic provisioning for system deployed in cloud",
+        "operationId" : "amendServiceElasticParameter",
+        "parameters" : [ {
+          "name" : "settingId",
+          "in" : "path",
+          "description" : "Contains the particular parameter record setting identifier.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceElasticParameter"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "ServiceElasticParameterResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceElasticParameterResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    },
+    "/system/services/workProfiles/{workProfileId}/elasticity" : {
+      "put" : {
+        "tags" : [ ],
+        "summary" : "Update number of agents for elastic scaling",
+        "description" : "Update number of agents for elastic scaling",
+        "operationId" : "amendServiceElasticProfile",
+        "parameters" : [ {
+          "name" : "workProfileId",
+          "in" : "path",
+          "description" : "Contains the reference to the record in service workload profiles for services.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceElasticProfile"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "ServiceElasticProfileResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceElasticProfileResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      },
+      "post" : {
+        "tags" : [ ],
+        "summary" : "Create number of agents for elastic scaling",
+        "description" : "Create number of agents for elastic scaling by inputting the queue details and minimum and maximum number of agents for elasticity",
+        "operationId" : "createServiceElasticProfile",
+        "parameters" : [ {
+          "name" : "workProfileId",
+          "in" : "path",
+          "description" : "Contains the reference to the record in service workload profiles for services.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ServiceElasticProfile"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "ServiceElasticProfileResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ServiceElasticProfileResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    },
+    "/system/settings/{settingId}/deploymentModes" : {
+      "put" : {
+        "tags" : [ ],
+        "summary" : "Update the system deployment mode",
+        "description" : "Update the system deployment mode by enabling whether in cloud or Not",
+        "operationId" : "amendSystemParameterElastic",
+        "parameters" : [ {
+          "name" : "settingId",
+          "in" : "path",
+          "description" : "Contains the particular parameter record setting identifier.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "validate_only",
+          "in" : "query",
+          "description" : "The identifier to indicate if it is set to only validate or not.",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "body Payload",
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/SystemParameterElastic"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "SystemParameterElasticResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemParameterElasticResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "ScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessScreenErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemScreenErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemScreenErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codegen-request-body-name" : "payload"
+      }
+    },
+    "/system/metrics/elasticity/agents/itemCount" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves the total number of agents required for cloud deployment",
+        "description" : "Retrieves the total number of agents required for cloud deploymentment",
+        "operationId" : "getAgentElasticCheck",
+        "parameters" : [ {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from Transact on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "AgentElasticCheckResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AgentElasticCheckResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/services/elasticity/agents" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves the agent details for active services in cloud deployment",
+        "description" : "Retrieves the agent details for active services in cloud deployment including minimum agents , maximum agents, total agents, service details , date and time of running agents etc",
+        "operationId" : "getAgentElasticCheckDetails",
+        "parameters" : [ {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from Transact on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "AgentElasticCheckDetailsResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AgentElasticCheckDetailsResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/services/elasticity/servers" : {
+      "get" : {
+        "tags" : [ ],
+        "summary" : "Retrieves last contact and server details for cloud mode",
+        "description" : "Retrieves last contact and server details for cloud mode",
+        "operationId" : "getElasticityServersDetails",
+        "parameters" : [ {
+          "name" : "page_size",
+          "in" : "query",
+          "description" : "The total number of records per page",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_start",
+          "in" : "query",
+          "description" : "The record from which the response should be displayed",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page_token",
+          "in" : "query",
+          "description" : "Unique id expected to get as part of response from Transact on every enquiry request.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "credentials",
+          "in" : "header",
+          "description" : "Username and password to authenticate the API against core-banking.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "companyId",
+          "in" : "header",
+          "description" : "Identifier of the lead company of the underlying Entity/Company/Branch for the respective contract for customer data protection purposes. Example US0010001.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deviceId",
+          "in" : "header",
+          "description" : "Identifies the device type",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userRole",
+          "in" : "header",
+          "description" : "User who initiated the transaction",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "disablePagination",
+          "in" : "header",
+          "description" : "Indicates the pagination header attributes availability. If set to 'true', it fetches all the data",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "ElasticityServersDetailsResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ElasticityServersDetailsResponse"
+                }
+              }
+            }
+          },
+          "default" : {
+            "description" : "QueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QueryErrorResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "BusinessQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BusinessQueryErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "SystemQueryErrorResponse",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SystemQueryErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "PayloadHeader" : {
+        "type" : "object",
+        "properties" : {
+          "override" : {
+            "$ref" : "#/components/schemas/PayloadHeaderOverride"
+          },
+          "audit" : {
+            "$ref" : "#/components/schemas/PayloadHeaderAudit"
+          }
+        }
+      },
+      "ServiceElasticCleanup" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/PayloadHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticCleanupBody"
+          }
+        },
+        "description" : "ServiceElasticCleanup"
+      },
+      "ServiceElasticCleanupBody" : {
+        "type" : "object",
+        "properties" : {
+          "cleanupTime" : {
+            "maxLength" : 11,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the time at which the pod is downscaled."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "ScreenHeader" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The Identifier of the record created"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          },
+          "transactionStatus" : {
+            "type" : "string",
+            "description" : "The status of the transaction"
+          },
+          "uniqueIdentifier" : {
+            "type" : "string",
+            "description" : "The unique identifier/Message Reference of the record created."
+          },
+          "audit" : {
+            "$ref" : "#/components/schemas/ScreenHeaderAudit"
+          }
+        }
+      },
+      "ServiceElasticCleanupResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ScreenHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticCleanupResponseBody"
+          }
+        },
+        "description" : "ServiceElasticCleanupResponse"
+      },
+      "ServiceElasticCleanupResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "cleanupTime" : {
+            "maxLength" : 11,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the time at which the pod is downscaled."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "ErrorHeader" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The Identifier of the record created"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          },
+          "transactionStatus" : {
+            "type" : "string",
+            "description" : "The status of the transaction"
+          },
+          "uniqueIdentifier" : {
+            "type" : "string",
+            "description" : "The unique identifier/Message Reference of the record created."
+          },
+          "audit" : {
+            "$ref" : "#/components/schemas/ScreenHeaderAudit"
+          }
+        }
+      },
+      "overrideBody" : {
+        "type" : "object",
+        "properties" : {
+          "overrideDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OverrideBodyOverrideDetails"
+            }
+          }
+        }
+      },
+      "ScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/ScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "ScreenErrorResponse"
+      },
+      "ScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: "
+          }
+        }
+      },
+      "BusinessScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/BusinessScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "BusinessScreenErrorResponse"
+      },
+      "BusinessScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BusinessScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: Business"
+          }
+        }
+      },
+      "SystemScreenErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/SystemScreenErrorResponseBody"
+          },
+          "override" : {
+            "$ref" : "#/components/schemas/overrideBody"
+          }
+        },
+        "description" : "SystemScreenErrorResponse"
+      },
+      "SystemScreenErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "errorDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SystemScreenErrorResponseBodyErrorDetails"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: System"
+          }
+        }
+      },
+      "ServiceElasticParameter" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/PayloadHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticParameterBody"
+          }
+        },
+        "description" : "ServiceElasticParameter"
+      },
+      "ServiceElasticParameterBody" : {
+        "type" : "object",
+        "properties" : {
+          "dynamicProvisioning" : {
+            "maxLength" : 19,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the setting for elastic scaling e.g Yes or No.When set to Yes the dynamic upscaling and downscaling system feature is enabled."
+          },
+          "queueJobs" : {
+            "maxLength" : 85,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the setting for queue processing e.g ALL or particular job name. If set to ALL or a particular job name then the system will use the JMS queue processing otherwise system will use the standard job list processing feature."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "ServiceElasticParameterResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ScreenHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticParameterResponseBody"
+          }
+        },
+        "description" : "ServiceElasticParameterResponse"
+      },
+      "ServiceElasticParameterResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "dynamicProvisioning" : {
+            "maxLength" : 19,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the setting for elastic scaling e.g Yes or No.When set to Yes the dynamic upscaling and downscaling system feature is enabled."
+          },
+          "queueJobs" : {
+            "maxLength" : 85,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the setting for queue processing e.g ALL or particular job name. If set to ALL or a particular job name then the system will use the JMS queue processing otherwise system will use the standard job list processing feature."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "ServiceElasticProfile" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/PayloadHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticProfileBody"
+          }
+        },
+        "description" : "ServiceElasticProfile"
+      },
+      "ServiceElasticProfileBody" : {
+        "type" : "object",
+        "properties" : {
+          "elasticity" : {
+            "type" : "array",
+            "description" : "Defines the ability of the system parameters to upscale or downscale, depending on factors like time of the day, keys to process for a service, the stage of the COB etc",
+            "items" : {
+              "$ref" : "#/components/schemas/ServiceElasticProfileBodyElasticity"
+            }
+          },
+          "displayName" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "startTime" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the time job was started"
+          },
+          "agentsRequired" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the number of agents required"
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "ServiceElasticProfileResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ScreenHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ServiceElasticProfileResponseBody"
+          }
+        },
+        "description" : "ServiceElasticProfileResponse"
+      },
+      "ServiceElasticProfileResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "elasticity" : {
+            "type" : "array",
+            "description" : "Defines the ability of the system parameters to upscale or downscale, depending on factors like time of the day, keys to process for a service, the stage of the COB etc",
+            "items" : {
+              "$ref" : "#/components/schemas/ServiceElasticProfileBodyElasticity"
+            }
+          },
+          "displayName" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the name used for display or enrichment purposes"
+          },
+          "startTime" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the time job was started"
+          },
+          "agentsRequired" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the number of agents required"
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "SystemParameterElastic" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/PayloadHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/SystemParameterElasticBody"
+          }
+        },
+        "description" : "SystemParameterElastic"
+      },
+      "SystemParameterElasticBody" : {
+        "type" : "object",
+        "properties" : {
+          "deploymentMode" : {
+            "maxLength" : 14,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Indicates the deployment mode setting. For example CLOUD for cloud deployment, otherwise null."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "SystemParameterElasticResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ScreenHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/SystemParameterElasticResponseBody"
+          }
+        },
+        "description" : "SystemParameterElasticResponse"
+      },
+      "SystemParameterElasticResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "deploymentMode" : {
+            "maxLength" : 14,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Indicates the deployment mode setting. For example CLOUD for cloud deployment, otherwise null."
+          },
+          "extensionData" : {
+            "type" : "object",
+            "properties" : { },
+            "description" : "Indicates the extension data"
+          }
+        }
+      },
+      "QueryHeader" : {
+        "type" : "object",
+        "properties" : {
+          "audit" : {
+            "$ref" : "#/components/schemas/ScreenHeaderAudit"
+          },
+          "status" : {
+            "type" : "string",
+            "description" : "Status of the API(success/failed)"
+          },
+          "page_size" : {
+            "type" : "integer",
+            "description" : "The total number of records per page",
+            "format" : "int32"
+          },
+          "page_start" : {
+            "type" : "integer",
+            "description" : "The record from which the response should be displayed",
+            "format" : "int32"
+          },
+          "total_size" : {
+            "type" : "integer",
+            "description" : "The total number of records present",
+            "format" : "int32"
+          },
+          "page_token" : {
+            "type" : "string",
+            "description" : "Unique id expected to get as part of response from Transact on every enquiry request"
+          }
+        }
+      },
+      "AgentElasticCheckResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/AgentElasticCheckResponseBody"
+          }
+        },
+        "description" : "AgentElasticCheckResponse"
+      },
+      "AgentElasticCheckResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/AgentElasticCheckResponseBodyInner"
+        }
+      },
+      "QueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/QueryErrorResponseBody"
+          }
+        },
+        "description" : "QueryErrorResponse"
+      },
+      "QueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message "
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: "
+          }
+        }
+      },
+      "BusinessQueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/BusinessQueryErrorResponseBody"
+          }
+        },
+        "description" : "BusinessQueryErrorResponse"
+      },
+      "BusinessQueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message for bad requests"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: Business"
+          }
+        }
+      },
+      "SystemQueryErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/ErrorHeader"
+          },
+          "error" : {
+            "$ref" : "#/components/schemas/SystemQueryErrorResponseBody"
+          }
+        },
+        "description" : "SystemQueryErrorResponse"
+      },
+      "SystemQueryErrorResponseBody" : {
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message caused by server"
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The identifier of error type: System"
+          }
+        }
+      },
+      "AgentElasticCheckDetailsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/AgentElasticCheckDetailsResponseBody"
+          }
+        },
+        "description" : "AgentElasticCheckDetailsResponse"
+      },
+      "AgentElasticCheckDetailsResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/AgentElasticCheckDetailsResponseBodyInner"
+        }
+      },
+      "ElasticityServersDetailsResponse" : {
+        "type" : "object",
+        "properties" : {
+          "header" : {
+            "$ref" : "#/components/schemas/QueryHeader"
+          },
+          "body" : {
+            "$ref" : "#/components/schemas/ElasticityServersDetailsResponseBody"
+          }
+        },
+        "description" : "ElasticityServersDetailsResponse"
+      },
+      "ElasticityServersDetailsResponseBody" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/ElasticityServersDetailsResponseBodyInner"
+        }
+      },
+      "PayloadHeaderOverrideOverrideDetails" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The identifier of the override."
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The actual override message."
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The code related to override message."
+          },
+          "responseCode" : {
+            "type" : "string",
+            "description" : "The user input to accept/reject the override."
+          }
+        }
+      },
+      "PayloadHeaderOverride" : {
+        "type" : "object",
+        "properties" : {
+          "overrideDetails" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PayloadHeaderOverrideOverrideDetails"
+            }
+          }
+        }
+      },
+      "PayloadHeaderAudit" : {
+        "type" : "object",
+        "properties" : {
+          "versionNumber" : {
+            "type" : "string",
+            "description" : "The CURR.NO. of the record"
+          }
+        }
+      },
+      "ScreenHeaderAudit" : {
+        "type" : "object",
+        "properties" : {
+          "T24_time" : {
+            "type" : "integer",
+            "description" : "Time taken to response by Transact",
+            "format" : "int32"
+          },
+          "versionNumber" : {
+            "type" : "string",
+            "description" : "The CURR.NO. of the record"
+          },
+          "requestParse_time" : {
+            "type" : "number",
+            "description" : "Time taken to parse the request by IRIS"
+          },
+          "responseParse_time" : {
+            "type" : "number",
+            "description" : "Time taken to parse the response by IRIS"
+          }
+        }
+      },
+      "OverrideBodyOverrideDetails" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "description" : "The identifier of the override."
+          },
+          "description" : {
+            "type" : "string",
+            "description" : "The actual override message."
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The code related to override message."
+          },
+          "options" : {
+            "type" : "array",
+            "description" : "The usable options for the override.",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "type" : {
+            "type" : "string",
+            "description" : "The type of the override."
+          }
+        }
+      },
+      "ScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message "
+          }
+        }
+      },
+      "BusinessScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message for bad requests"
+          }
+        }
+      },
+      "SystemScreenErrorResponseBodyErrorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "fieldName" : {
+            "type" : "string",
+            "description" : "The name of the field"
+          },
+          "code" : {
+            "type" : "string",
+            "description" : "The identifier of the error message"
+          },
+          "message" : {
+            "type" : "string",
+            "description" : "The actual Transact error message caused by server"
+          }
+        }
+      },
+      "ServiceElasticProfileBodyElasticity" : {
+        "type" : "object",
+        "properties" : {
+          "elasticDateTime" : {
+            "maxLength" : 18,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the date and time for elastic profile of the service at which the upscaling and downscaling of the processing agents would take place. If blank then the default number of agents is used for the processing."
+          },
+          "elasticQueueDepth" : {
+            "maxLength" : 18,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the number of records for the elastic profile which controls the number of processing agents to be spawned or downscaled."
+          },
+          "elasticJob" : {
+            "maxLength" : 25,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains the name of the job for which the elastic profile is enabled for upscaling and downscaling."
+          },
+          "elasticMinimum" : {
+            "maxLength" : 14,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains minimum number of agents for elastic profile."
+          },
+          "elasticMaximum" : {
+            "maxLength" : 14,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains maximum number of processing agents for elastic profile."
+          },
+          "elasticTotal" : {
+            "maxLength" : 13,
+            "minLength" : 0,
+            "type" : "string",
+            "description" : "Contains total number of processing agents for elastic profile."
+          }
+        }
+      },
+      "AgentElasticCheckResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "result" : {
+            "maxLength" : 4,
+            "type" : "string",
+            "description" : "Status to determine requirements of the agents for scaling of services"
+          }
+        }
+      },
+      "AgentElasticCheckDetailsResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "serviceId" : {
+            "maxLength" : 70,
+            "type" : "string",
+            "description" : "Contains the identifier name of the service that has to be executed."
+          },
+          "dateTime" : {
+            "type" : "string",
+            "description" : "Contains the date and time separated by '-'",
+            "format" : "date-time"
+          },
+          "queueDepth" : {
+            "maxLength" : 70,
+            "type" : "string",
+            "description" : "Number of entries waiting to be processed in the Queue"
+          },
+          "minimumAgent" : {
+            "maximum" : 70,
+            "type" : "number",
+            "description" : "Contains the minimum agents configured for the service."
+          },
+          "maximumAgent" : {
+            "maximum" : 70,
+            "type" : "number",
+            "description" : "Contains the maximum agents configured for the service."
+          },
+          "totalAgent" : {
+            "maximum" : 70,
+            "type" : "number",
+            "description" : "The total number of agents expected to be run"
+          },
+          "runningAgent" : {
+            "maximum" : 70,
+            "type" : "number",
+            "description" : "The number of agents currently running"
+          }
+        }
+      },
+      "ElasticityServersDetailsResponseBodyInner" : {
+        "type" : "object",
+        "properties" : {
+          "serverName" : {
+            "maxLength" : 10,
+            "type" : "string",
+            "description" : "Contains the name of the server on which the service will run.  In cloud mode, it refers to pod or container."
+          },
+          "isBatchContainer" : {
+            "type" : "string",
+            "description" : "Indicates if the current server or container is batch instance."
+          },
+          "lastContactTime" : {
+            "maxLength" : 12,
+            "type" : "string",
+            "description" : "Contains the last contact time of running agent."
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "basicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      },
+      "apiKey" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header"
+      }
+    }
+  },
+  "x-original-swagger-version" : "2.0"
+}
