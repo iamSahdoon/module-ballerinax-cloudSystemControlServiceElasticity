@@ -41,4 +41,21 @@ isolated function testGetNumberofElasticityAgents() returns error? {
     }
 }
 
+@test:Config {
+    groups: ["get_test2"]
+}
+isolated function testGetElasticityAgents() returns error? {
+    AgentElasticCheckDetailsResponse|error response = temenos->/services/elasticity/agents.get();
+    if response is AgentElasticCheckDetailsResponse {
+        io:println("Success Response: ", response);
+        test:assertTrue(response is AgentElasticCheckResponse, "Response failed");
+        test:assertTrue(response.header?.status == "success", "Response status is not success");
+    } else {
+        io:println("Error Response: ", response.message());
+        test:assertFail("Failed to get elasticity agents");
+    }
+}
+
+
+
 
