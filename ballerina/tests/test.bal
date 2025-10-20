@@ -15,6 +15,7 @@
 
 import ballerina/test;
 import ballerina/io;
+import ballerina/http;
 
 configurable ApiKeysConfig apiKeyConfig = ?;
 configurable string serviceUrl = "https://api.temenos.com/api/v1.1.0/system";
@@ -63,7 +64,7 @@ isolated function testGetElasticityServers() returns error? {
     ElasticityServersDetailsResponse|error response = temenos->/services/elasticity/servers.get();
     if response is ElasticityServersDetailsResponse {
         io:println("Success Response: ", response);
-        test:assertTrue(response is AgentElasticCheckResponse, "Response failed");
+        test:assertTrue(response is ElasticityServersDetailsResponse, "Response failed");
         test:assertTrue(response.header?.status == "success", "Response status is not success");
     } else {
         io:println("Error Response: ", response.message());
@@ -71,5 +72,31 @@ isolated function testGetElasticityServers() returns error? {
     }
 }
 
+@test:Config {
+    groups: ["post_test1"]
+}
+isolated function testPostInitiateCleanUp() returns error? {
+    
+    // Update the card issue request body
+    ServiceElasticCleanupResponseBody payload = {
+        cleanupTime: "90"
+    };
+
+    // Convert payload to JSON and update request
+    json jsonPayload = payload.toJson();
+    http:Request request = new;
+    request.setJsonPayload(jsonPayload);
+
+    ServiceElasticCleanupResponse|error response = temenos->/services/elasticity/servers/pod/serviceCleanups.post(request);
+    
+    if response is ServiceElasticCleanupResponse {
+        io:println("Success Response: ", response);
+        test:assertTrue(response is ServiceElasticCleanupResponse, "Response failed");
+        test:assertTrue(response.header?.status == "success", "Response status is not success");
+    } else {
+        io:println("Error Response: ", response.message());
+        test:assertFail("Failed to post service elasticity cleanup");
+    }
+}
 
 
