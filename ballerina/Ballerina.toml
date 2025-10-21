@@ -6,7 +6,7 @@ version = "0.1.0"
 license = ["Apache-2.0"]
 authors = ["iamSahdoon"]
 keywords = ["banking", "temenos", "api" , "cloud", "system control", "elasticity"]
-repository = "https://github.com/iamSahdoon/module-ballerinax-temenosCloudSystemControlServiceElasticity"
+repository = "https://github.com/iamSahdoon/module-ballerinax-cloudSystemControlServiceElasticity"
 
 [build-options]
 observabilityIncluded = true
